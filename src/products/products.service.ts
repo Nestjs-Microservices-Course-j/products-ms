@@ -86,4 +86,24 @@ export class ProductsService extends PrismaClient implements OnModuleInit {
     })
 
   }
+
+  async validateProducts( ids: number[] ) {
+    //*Un Set es un tipo de estructura en js sin duplicados, es decir purga los duplicados de un arreglo
+    ids = Array.from( new Set( ids ) );
+
+    const products = await this.product.findMany({
+      where: {
+        id: { in: ids } //busca en la tabla todos los ids del arreglo
+      }
+    });
+
+    if( products.length != ids.length ) {
+        throw new RpcException({ 
+          message: 'Some produts were not found',
+          status: HttpStatus.BAD_REQUEST
+        })
+    }
+
+    return products;
+  }
 }
