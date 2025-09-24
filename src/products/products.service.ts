@@ -1,5 +1,5 @@
-import { HttpStatus, Injectable, Logger, NotFoundException, OnModuleInit } from '@nestjs/common';
-import { PrismaClient } from 'generated/prisma';
+import { HttpStatus, Injectable, Logger, OnModuleInit } from '@nestjs/common';
+import { PrismaClient } from "@prisma/client";
 
 import { CreateProductDto } from './dto/create-product.dto';
 import { UpdateProductDto } from './dto/update-product.dto';
